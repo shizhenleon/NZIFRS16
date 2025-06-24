@@ -1,0 +1,197 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Lease Calculator Styles */
+.lease-calc-container {
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px #0001;
+  text-align: left;
+}
+.lease-calc-container h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.lease-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.lease-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+.lease-form input,
+.lease-form select {
+  margin-top: 0.25rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+.lease-form button {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #646cff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.lease-form button:hover {
+  background: #4b51c6;
+}
+.lease-form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.lease-form-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+.result {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f6f8ff;
+  border-radius: 8px;
+  text-align: center;
+}
+.result h2 {
+  margin-bottom: 0.5rem;
+}
+.lease-form-hint {
+  font-size: 0.95em;
+  color: #888;
+  margin-top: 0.1em;
+  text-align: right;
+}
+
+/* Amortization Table Styles */
+.amortization-table-wrapper {
+  overflow-x: auto;
+  margin-top: 1.5rem;
+  width: 100vw;
+  max-width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding-left: 50vw;
+  padding-right: 50vw;
+}
+.amortization-table {
+  min-width: 800px;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.98em;
+  background: #fff;
+}
+.amortization-table th,
+.amortization-table td {
+  border: 1px solid #e0e0e0;
+  padding: 0.5em 0.7em;
+  text-align: right;
+}
+.amortization-table th {
+  background: #f6f8ff;
+  color: #333;
+  font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+  body, #root {
+    background: #181a1b;
+    color: #f3f3f3;
+  }
+  .lease-calc-container {
+    background: #23272f;
+    color: #f3f3f3;
+    box-shadow: 0 2px 16px #0008;
+  }
+  .lease-form-title {
+    color: #e0e0e0;
+  }
+  .lease-form input,
+  .lease-form select {
+    background: #23272f;
+    color: #f3f3f3;
+    border: 1px solid #444;
+  }
+  .lease-form input:focus,
+  .lease-form select:focus {
+    border-color: #646cff;
+    outline: none;
+  }
+  .lease-form button {
+    background: #646cff;
+    color: #fff;
+  }
+  .lease-form button:hover {
+    background: #4b51c6;
+  }
+  .result {
+    background: #23272f;
+    color: #f3f3f3;
+  }
+  .amortization-table {
+    background: #23272f;
+    color: #f3f3f3;
+  }
+  .amortization-table th {
+    background: #181a1b;
+    color: #f3f3f3;
+  }
+  .amortization-table td {
+    border-color: #444;
+  }
+}
