@@ -8,7 +8,6 @@ interface LeaseInput {
   interestRate: number
   startDate: string
   rentIncreaseRate?: number // percent per increase
-  rentIncreaseStart?: number // period number (1-based)
 }
 
 function calculateLeaseLiability({ leaseTerm, paymentAmount, paymentFrequency, interestRate }: LeaseInput) {
@@ -22,7 +21,7 @@ function calculateLeaseLiability({ leaseTerm, paymentAmount, paymentFrequency, i
   return pv
 }
 
-function generateAmortizationSchedule({ leaseTerm, paymentAmount, paymentFrequency, interestRate, rentIncreaseRate = 0, rentIncreaseStart = 0 }: LeaseInput) {
+function generateAmortizationSchedule({ leaseTerm, paymentAmount, paymentFrequency, interestRate, rentIncreaseRate = 0 }: LeaseInput) {
   const freqMap = { monthly: 12, quarterly: 4, yearly: 1 }
   const paymentsPerYear = freqMap[paymentFrequency]
   const totalPayments = leaseTerm * paymentsPerYear
@@ -70,7 +69,6 @@ function App() {
     interestRate: 6,
     startDate: '',
     rentIncreaseRate: 0,
-    rentIncreaseStart: 0,
   })
   const [result, setResult] = useState<number | null>(null)
   const [schedule, setSchedule] = useState<any[]>([])
@@ -79,7 +77,7 @@ function App() {
     const { name, value } = e.target
     setInput((prev) => ({
       ...prev,
-      [name]: name === 'leaseTerm' || name === 'paymentAmount' || name === 'interestRate' || name === 'rentIncreaseRate' || name === 'rentIncreaseStart' ? Number(value) : value,
+      [name]: name === 'leaseTerm' || name === 'paymentAmount' || name === 'interestRate' || name === 'rentIncreaseRate' ? Number(value) : value,
     }))
   }
 
@@ -131,10 +129,6 @@ function App() {
         <div className="lease-form-group">
           <div className="lease-form-title">Rent Increase Rate (%)</div>
           <input type="number" name="rentIncreaseRate" value={input.rentIncreaseRate} min={0} step={0.01} onChange={handleChange} />
-        </div>
-        <div className="lease-form-group">
-          <div className="lease-form-title">Rent Increase Start Period</div>
-          <input type="number" name="rentIncreaseStart" value={input.rentIncreaseStart} min={0} step={1} onChange={handleChange} />
         </div>
         <button type="submit">Calculate</button>
       </form>
