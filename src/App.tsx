@@ -52,7 +52,8 @@ function generateAmortizationSchedule({ leaseTerm, paymentAmount, paymentFrequen
       else if (paymentFrequency === 'quarterly') endDate.setMonth(endDate.getMonth() + 3)
       else if (paymentFrequency === 'yearly') endDate.setFullYear(endDate.getFullYear() + 1)
       endDate.setDate(endDate.getDate() - 1)
-      periodEnd = endDate.toISOString().slice(0, 10)
+      // Format as 'MMM yyyy' (e.g. 'Jun 2025')
+      periodEnd = endDate.toLocaleString('en-NZ', { month: 'short', year: 'numeric' })
       periodDate = new Date(endDate)
       periodDate.setDate(periodDate.getDate() + 1)
     }
