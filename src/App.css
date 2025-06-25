@@ -1,8 +1,30 @@
+/* Solarized Dark palette */
+:root {
+  --base03: #002b36;
+  --base02: #073642;
+  --base01: #586e75;
+  --base00: #657b83;
+  --base0:  #839496;
+  --base1:  #93a1a1;
+  --base2:  #eee8d5;
+  --base3:  #fdf6e3;
+  --yellow: #b58900;
+  --orange: #cb4b16;
+  --red:    #dc322f;
+  --magenta:#d33682;
+  --violet: #6c71c4;
+  --blue:   #268bd2;
+  --cyan:   #2aa198;
+  --green:  #859900;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background: var(--base03);
+  color: var(--base0);
 }
 
 .logo {
@@ -46,9 +68,10 @@
   max-width: 480px;
   margin: 2rem auto;
   padding: 2rem;
-  background: #fff;
+  background: var(--base02);
+  color: var(--base0);
   border-radius: 12px;
-  box-shadow: 0 2px 16px #0001;
+  box-shadow: 0 2px 16px #0008;
   text-align: left;
 }
 .lease-calc-container h1 {
@@ -70,14 +93,21 @@
   margin-top: 0.25rem;
   padding: 0.5rem;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--base00);
   font-size: 1rem;
+  background: var(--base01);
+  color: var(--base1);
+}
+.lease-form input:focus,
+.lease-form select:focus {
+  border-color: var(--blue);
+  outline: none;
 }
 .lease-form button {
   margin-top: 1rem;
   padding: 0.75rem;
-  background: #646cff;
-  color: #fff;
+  background: var(--blue);
+  color: var(--base3);
   border: none;
   border-radius: 6px;
   font-size: 1.1rem;
@@ -85,7 +115,8 @@
   transition: background 0.2s;
 }
 .lease-form button:hover {
-  background: #4b51c6;
+  background: var(--cyan);
+  color: var(--base3);
 }
 .lease-form-group {
   display: flex;
@@ -96,12 +127,13 @@
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.25rem;
-  color: #333;
+  color: var(--yellow);
 }
 .result {
   margin-top: 2rem;
   padding: 1rem;
-  background: #f6f8ff;
+  background: var(--base02);
+  color: var(--base0);
   border-radius: 8px;
   text-align: center;
 }
@@ -110,7 +142,7 @@
 }
 .lease-form-hint {
   font-size: 0.95em;
-  color: #888;
+  color: var(--base1);
   margin-top: 0.1em;
   text-align: right;
 }
@@ -134,64 +166,17 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 0.98em;
-  background: #fff;
+  background: var(--base02);
+  color: var(--base0);
 }
 .amortization-table th,
 .amortization-table td {
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--base00);
   padding: 0.5em 0.7em;
   text-align: right;
 }
 .amortization-table th {
-  background: #f6f8ff;
-  color: #333;
+  background: var(--base01);
+  color: var(--yellow);
   font-weight: 600;
-}
-
-@media (prefers-color-scheme: dark) {
-  body, #root {
-    background: #181a1b;
-    color: #f3f3f3;
-  }
-  .lease-calc-container {
-    background: #23272f;
-    color: #f3f3f3;
-    box-shadow: 0 2px 16px #0008;
-  }
-  .lease-form-title {
-    color: #e0e0e0;
-  }
-  .lease-form input,
-  .lease-form select {
-    background: #23272f;
-    color: #f3f3f3;
-    border: 1px solid #444;
-  }
-  .lease-form input:focus,
-  .lease-form select:focus {
-    border-color: #646cff;
-    outline: none;
-  }
-  .lease-form button {
-    background: #646cff;
-    color: #fff;
-  }
-  .lease-form button:hover {
-    background: #4b51c6;
-  }
-  .result {
-    background: #23272f;
-    color: #f3f3f3;
-  }
-  .amortization-table {
-    background: #23272f;
-    color: #f3f3f3;
-  }
-  .amortization-table th {
-    background: #181a1b;
-    color: #f3f3f3;
-  }
-  .amortization-table td {
-    border-color: #444;
-  }
 }
