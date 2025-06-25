@@ -154,8 +154,9 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setResult(calculateLeaseLiability(input))
-    setSchedule(generateAmortizationSchedule({ ...input, modifications }))
+    const sched = generateAmortizationSchedule({ ...input, modifications })
+    setSchedule(sched)
+    setResult(sched.length > 0 ? sched[0].openingLiability : null)
   }
 
   return (
