@@ -21,7 +21,7 @@ function calculateLeaseLiability({ leaseTerm, paymentAmount, paymentFrequency, i
   return pv
 }
 
-function generateAmortizationSchedule({ leaseTerm, paymentAmount, paymentFrequency, interestRate, rentIncreaseRate = 0 }: LeaseInput) {
+function generateAmortizationSchedule({ leaseTerm, paymentAmount, paymentFrequency, interestRate, rentIncreaseRate = 0, startDate }: LeaseInput) {
   const freqMap = { monthly: 12, quarterly: 4, yearly: 1 }
   const paymentsPerYear = freqMap[paymentFrequency]
   const totalPayments = leaseTerm * paymentsPerYear
@@ -32,6 +32,8 @@ function generateAmortizationSchedule({ leaseTerm, paymentAmount, paymentFrequen
   let assetBalance = initialAsset
   let currentPayment = paymentAmount
   const schedule = []
+  // Calculate period end dates
+  let periodDate = startDate ? new Date(startDate) : null
   for (let i = 1; i <= totalPayments; i++) {
     // Apply rent increase at the start of each year (except the first year)
     if (
@@ -42,12 +44,25 @@ function generateAmortizationSchedule({ leaseTerm, paymentAmount, paymentFrequen
     ) {
       currentPayment = currentPayment * (1 + rentIncreaseRate / 100)
     }
+    // Calculate period end date
+    let periodEnd = ''
+    if (periodDate) {
+      let endDate = new Date(periodDate)
+      if (paymentFrequency === 'monthly') endDate.setMonth(endDate.getMonth() + 1)
+      else if (paymentFrequency === 'quarterly') endDate.setMonth(endDate.getMonth() + 3)
+      else if (paymentFrequency === 'yearly') endDate.setFullYear(endDate.getFullYear() + 1)
+      endDate.setDate(endDate.getDate() - 1)
+      periodEnd = endDate.toISOString().slice(0, 10)
+      periodDate = new Date(endDate)
+      periodDate.setDate(periodDate.getDate() + 1)
+    }
     const interest = liabilityBalance * ratePerPeriod
     const principal = currentPayment - interest
     const endingLiability = liabilityBalance - principal
     assetBalance = assetBalance - depreciationPerPeriod
     schedule.push({
       period: i,
+      periodEnd,
       openingLiability: liabilityBalance,
       interestExpense: interest,
       payment: currentPayment,
@@ -142,6 +157,7 @@ function App() {
               <thead>
                 <tr>
                   <th>Period</th>
+                  <th>Period End</th>
                   <th>Opening Lease Liability</th>
                   <th>Interest</th>
                   <th>Payment</th>
@@ -155,6 +171,7 @@ function App() {
                 {schedule.map((row) => (
                   <tr key={row.period}>
                     <td>{row.period}</td>
+                    <td>{row.periodEnd}</td>
                     <td>{row.openingLiability.toLocaleString('en-NZ', { style: 'currency', currency: 'NZD', maximumFractionDigits: 2 })}</td>
                     <td>{row.interestExpense.toLocaleString('en-NZ', { style: 'currency', currency: 'NZD', maximumFractionDigits: 2 })}</td>
                     <td>{row.payment.toLocaleString('en-NZ', { style: 'currency', currency: 'NZD', maximumFractionDigits: 2 })}</td>
